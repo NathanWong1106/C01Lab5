@@ -90,7 +90,6 @@ test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
 
 test("/deleteNote - Delete a note", async () => {
   const postNoteRes = await postNote("1", "1");
-  console.log(postNoteRes);
   const postNoteId = (await postNoteRes.json()).insertedId;
 
   const deleteNoteRes = await fetch(`${SERVER_URL}/deleteNote/${postNoteId}`, {
@@ -119,10 +118,10 @@ test("/patchNote - Patch with content and title", async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       title: title,
       content: content
-    }
+    })
   });
 
   const patchNoteBody = await patchNoteRes.json();
@@ -143,9 +142,9 @@ test("/patchNote - Patch with just title", async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       title: title,
-    }
+    })
   });
 
   const patchNoteBody = await patchNoteRes.json();
@@ -166,9 +165,9 @@ test("/patchNote - Patch with just content", async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       content: content
-    }
+    })
   });
 
   const patchNoteBody = await patchNoteRes.json();
@@ -209,9 +208,9 @@ test("/updateNoteColor - Update color of a note to red (#FF0000)", async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       color: "red"
-    }
+    })
   });
 
   const updateColorBody = await updateColorRes.json();
